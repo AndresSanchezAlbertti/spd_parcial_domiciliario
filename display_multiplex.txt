@@ -1,0 +1,265 @@
+// C++ code
+//
+#define A 12
+#define B 13
+#define C 7
+#define D 8
+#define E 9
+#define F 11
+#define G 10
+#define SUBE 4
+#define BAJA 5
+#define RESET 3
+#define UNIDAD A4
+#define DECENA A5
+#define APAGADOS 0
+#define TIMEDISPLAYON 10
+
+int countDigit = 0;
+int sube =1;
+int subeprevio =1;
+int baja=1;
+int bajaprevio =1;
+int resetprevia = 1;
+int reset =1;
+
+
+
+const int bpulsar = 1;
+
+void setup()
+{
+  
+  pinMode(3,INPUT_PULLUP);
+  pinMode(4,INPUT_PULLUP);
+  pinMode(5,INPUT_PULLUP);
+  pinMode(10,OUTPUT);
+  pinMode(7,OUTPUT);
+  pinMode(8,OUTPUT);
+  pinMode(9,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(13,OUTPUT);
+  pinMode(UNIDAD,OUTPUT);
+  pinMode(DECENA, OUTPUT);
+  digitalWrite(UNIDAD,0);
+  digitalWrite(DECENA,0);
+  pinMode(12,OUTPUT);
+  
+  
+}
+
+void loop()
+{
+  int pressed= keypressed();
+  if (pressed == SUBE)
+  {
+    countDigit++;
+    if (countDigit>99)
+      
+    
+      countDigit = 0;
+      
+    
+  }
+  else if(pressed == BAJA)
+  {
+    countDigit--;
+    if(countDigit<0)
+      	
+    	countDigit = 99;
+    	
+    
+  }
+  else if(pressed == RESET)
+  {
+    countDigit= 0;
+   
+  }
+  printCount(countDigit);
+  
+}
+void prendeDigito(int digito)
+  
+{
+  
+  if (digito ==UNIDAD)
+  {
+    digitalWrite(UNIDAD,LOW);
+    digitalWrite(DECENA, HIGH);
+    
+  } 
+  else if (digito ==DECENA)
+  {
+    digitalWrite(UNIDAD,HIGH);
+    digitalWrite(DECENA,LOW);
+    
+  }
+  else
+  {
+    digitalWrite(UNIDAD,HIGH);
+    digitalWrite(DECENA, HIGH);
+    
+    
+  }
+}
+   
+void printCount( int count){
+  prendeDigito(APAGADOS);
+  printDigit(count/10);
+  prendeDigito(DECENA);
+  prendeDigito(APAGADOS);
+  printDigit(count - 10*((int) count/10));
+  prendeDigito(UNIDAD);
+ 
+ }
+
+int keypressed(void){
+  	
+	sube = digitalRead(SUBE);
+  	baja = digitalRead(BAJA);
+  	reset = digitalRead(RESET);
+  	if (sube)
+      subeprevio=1;
+  	if (baja)
+      bajaprevio = 1;
+  	if(reset)
+      resetprevia = 1;
+  		if (sube==0 && sube != subeprevio)
+        {
+          subeprevio=sube;
+          return SUBE;
+        }
+  		if (baja ==0 && baja != bajaprevio)
+        {
+          bajaprevio = baja;
+          return BAJA;
+          
+        }
+  		if (reset == 0 && reset != resetprevia)
+        {
+          resetprevia = reset;
+  		  return RESET;
+        }
+  return 0;
+          
+  	
+
+}
+void printDigit(int digit)
+{
+  	digitalWrite(A, LOW);
+  	digitalWrite(B, LOW);
+  	digitalWrite(C, LOW);
+  	digitalWrite(D, LOW);
+  	digitalWrite(E, LOW);
+  	digitalWrite(F, LOW);
+  	digitalWrite(G, LOW);
+    switch (digit)
+    
+    {
+    case 0:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+        digitalWrite(E, HIGH);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, LOW); // Cambié D por G ya que parece ser un error de copia
+        break;
+
+    case 1:
+        digitalWrite(A, LOW);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, LOW);
+        digitalWrite(E, LOW);
+        digitalWrite(F, LOW);
+        digitalWrite(G, LOW); // Cambié D por G
+        break;
+
+    case 2:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, LOW);
+        digitalWrite(D, HIGH);
+        digitalWrite(E, HIGH);
+        digitalWrite(F, LOW);
+        digitalWrite(G, HIGH); // Cambié D por G
+        break;
+
+    case 3:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+        digitalWrite(E, LOW);
+        digitalWrite(F, LOW);
+        digitalWrite(G, HIGH); // Cambié D por G
+        break;
+
+    case 4:
+        digitalWrite(A, LOW);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, LOW);
+        digitalWrite(E, LOW);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH); // Cambié D por G
+        break;
+
+    case 5:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, LOW);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+        digitalWrite(E, LOW);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH); // Cambié D por G
+        break;
+
+    case 6:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, LOW);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+        digitalWrite(E, HIGH);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH); // Cambié D por G
+        break;
+
+    case 7:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, LOW);
+        digitalWrite(E, LOW);
+        digitalWrite(F, LOW);
+        digitalWrite(G, LOW); // Cambié D por G
+        break;
+
+    case 8:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+        digitalWrite(E, HIGH);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH); // Cambié D por G
+        break;
+
+    case 9:
+        digitalWrite(A, HIGH);
+        digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+        digitalWrite(E, LOW);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH); // Cambié D por G
+        break;
+    }
+}
+    
+    
+ 
+
+  int boton = digitalRead(bpulsar);
