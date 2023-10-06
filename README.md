@@ -4,7 +4,12 @@ INTEGRANTES:
 - Andrés Sánchez Albertti
 LINK AL PROYECTO:
 https://www.tinkercad.com/things/dUYujzNjsdR
-DESCRIPCION:
 !Display_multiplexado.png[https://github.com/AndresSanchezAlbertti/spd_parcial_domiciliario/blob/main/Display_multiplexado.png?raw=true]
+
+DESCRIPCIÓN:
+
+FUNCIÓN PRINCIPAL:
+
+
 
 
